@@ -1,3 +1,9 @@
 [submodule "hetero_graph/acm"]
 	path = hetero_graph/acm
 	url = https://huggingface.co/datasets/genghaobuaa/ACM
+[submodule "hetero_graph/imdb"]
+	path = hetero_graph/imdb
+	url = https://huggingface.co/datasets/genghaobuaa/IMDB
+[submodule "hetero_graph/dblp"]
+	path = hetero_graph/dblp
+	url = https://huggingface.co/datasets/genghaobuaa/DBLP
