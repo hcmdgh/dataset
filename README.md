@@ -10,6 +10,8 @@
     - [IMDB](https://huggingface.co/datasets/genghaobuaa/IMDB)
 - 图集合
     - [TRIANGLES](https://huggingface.co/datasets/genghaobuaa/TRIANGLES)
+    - [substructure_counting](https://huggingface.co/datasets/genghaobuaa/substructure_counting)
+    - [EXP](https://huggingface.co/datasets/genghaobuaa/EXP)
 
 # 使用方式
 
@@ -29,6 +31,10 @@ GIT_LFS_SKIP_SMUDGE=1 git clone https://github.com/hcmdgh/dataset --recursive
 # 进入某个数据集目录
 git lfs pull 
 ```
+
+## 加载数据集
+
+通过各个数据集目录下的load.py，加载数据集。
 
 # 原始数据下载
 
