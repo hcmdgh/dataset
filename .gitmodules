@@ -7,3 +7,6 @@
 [submodule "hetero_graph/dblp"]
 	path = hetero_graph/DBLP
 	url = https://huggingface.co/datasets/genghaobuaa/DBLP
+[submodule "graph_collection/TRIANGLES"]
+	path = graph_collection/TRIANGLES
+	url = https://huggingface.co/datasets/genghaobuaa/TRIANGLES

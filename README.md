@@ -2,6 +2,15 @@
 
 收集一些图神经网络、推荐系统等领域的公开的数据集，以及相应的预处理代码。
 
+# 数据集描述
+
+- 异质图
+    - [ACM](https://huggingface.co/datasets/genghaobuaa/ACM)
+    - [DBLP](https://huggingface.co/datasets/genghaobuaa/DBLP)
+    - [IMDB](https://huggingface.co/datasets/genghaobuaa/IMDB)
+- 图集合
+    - [TRIANGLES](https://huggingface.co/datasets/genghaobuaa/TRIANGLES)
+
 # 使用方式
 
 ## 完整下载
