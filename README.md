@@ -20,3 +20,7 @@ GIT_LFS_SKIP_SMUDGE=1 git clone https://github.com/hcmdgh/dataset --recursive
 # 进入某个数据集目录
 git lfs pull 
 ```
+
+# 原始数据下载
+
+数据集的原始数据存储在[我的Hugging Face空间](https://huggingface.co/genghaobuaa/datasets)。
