@@ -1,2 +1,4 @@
 __pycache__
 draft
+*.pkl
+*.pt 
