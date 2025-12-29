@@ -19,3 +19,6 @@
 [submodule "graph_collection/GNN-Benchmark-Dataset"]
 	path = graph_collection/GNN-Benchmark-Dataset
 	url = https://huggingface.co/datasets/genghaobuaa/GNN-Benchmark-Dataset
+[submodule "graph/ogbn-arxiv"]
+	path = graph/ogbn-arxiv
+	url = https://huggingface.co/datasets/genghaobuaa/ogbn-arxiv

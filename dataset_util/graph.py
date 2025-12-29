@@ -1,6 +1,6 @@
 import torch 
+import torch_geometric.utils as pyg_util 
 from torch_geometric.data import Data, Batch 
-from torch_geometric.utils import add_remaining_self_loops 
 import pickle 
 import os 
 
@@ -17,7 +17,7 @@ def load_ours_triangle_identification_dataset(
         graph = pickle.load(r)
 
     if add_self_loop:
-        graph.edge_index, _ = add_remaining_self_loops(
+        graph.edge_index, _ = pyg_util.add_remaining_self_loops(
             edge_index = graph.edge_index, 
             num_nodes = int(graph.num_nodes),
         )
@@ -35,9 +35,33 @@ def load_ours_triangle_identification_dataset(
     return graph 
 
 
+def load_ogbn_arxiv_dataset(
+    to_undirected: bool,
+    add_self_loop: bool,
+) -> Data:
+    dataset_dir = os.path.join(dataset_root, 'ogbn-arxiv')
+
+    with open(os.path.join(dataset_dir, f'processed_data/graph.pkl'), 'rb') as r:
+        graph = pickle.load(r)
+
+    if to_undirected:
+        graph.edge_index = pyg_util.to_undirected(
+            edge_index = graph.edge_index, 
+            num_nodes = int(graph.num_nodes),
+        )
+
+    if add_self_loop:
+        graph.edge_index, _ = pyg_util.add_remaining_self_loops(
+            edge_index = graph.edge_index, 
+            num_nodes = int(graph.num_nodes),
+        )
+
+    return graph 
+
+
 if __name__ == '__main__':
-    data = load_ours_triangle_identification_dataset(
-        add_node_feat = 'randn_128',
+    data = load_ogbn_arxiv_dataset(
+        to_undirected = True,
         add_self_loop = True,
     )
     print(data)
