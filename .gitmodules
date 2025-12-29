@@ -16,3 +16,6 @@
 [submodule "graph_collection/substructure_counting"]
 	path = graph_collection/substructure_counting
 	url = https://huggingface.co/datasets/genghaobuaa/substructure_counting
+[submodule "graph_collection/GNN-Benchmark-Dataset"]
+	path = graph_collection/GNN-Benchmark-Dataset
+	url = https://huggingface.co/datasets/genghaobuaa/GNN-Benchmark-Dataset
