@@ -1,0 +1,43 @@
+import torch 
+import torch_geometric.utils as pyg_util 
+from torch_geometric.data import Data, HeteroData
+import pickle 
+import os 
+
+dataset_root = "/mnt/dolphinfs/hdd_pool/docker/user/hadoop-hmart-waimaiad/canyin/genghao07/dataset/hetero_graph"
+
+
+def load_rcdd_subgraph_dataset(
+    val_ratio: float = 0.1,
+) -> HeteroData:
+    dataset_dir = os.path.join(dataset_root, 'RCDD')
+
+    with open(os.path.join(dataset_dir, 'processed_data/subgraph.pkl'), 'rb') as r:
+        graph = pickle.load(r)
+
+    train_val_mask_1d = graph['item'].train_mask
+    train_val_idx_1d = train_val_mask_1d.nonzero().flatten()
+    train_val_cnt = len(train_val_idx_1d)
+    val_cnt = int(train_val_cnt * val_ratio) 
+    train_cnt = train_val_cnt - val_cnt
+    assert train_cnt > 0 and val_cnt > 0
+
+    generator = torch.Generator().manual_seed(42)
+    perm_1d = torch.randperm(train_val_cnt, generator=generator)
+    train_idx_1d = train_val_idx_1d[perm_1d[:train_cnt]]
+    val_idx_1d = train_val_idx_1d[perm_1d[train_cnt:]]
+    train_mask_1d = torch.zeros_like(train_val_mask_1d)
+    train_mask_1d[train_idx_1d] = True
+    val_mask_1d = torch.zeros_like(train_val_mask_1d)
+    val_mask_1d[val_idx_1d] = True 
+
+    graph['item'].train_mask = train_mask_1d
+    graph['item'].val_mask = val_mask_1d
+
+    return graph 
+
+
+if __name__ == '__main__':
+    data = load_rcdd_subgraph_dataset(
+    )
+    print(data)
