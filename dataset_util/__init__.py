@@ -1,3 +1,5 @@
+from . import ctr_graph 
+
 from .graph_collection import * 
 
 from .graph import * 

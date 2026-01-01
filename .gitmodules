@@ -25,3 +25,6 @@
 [submodule "hetero_graph/RCDD"]
 	path = hetero_graph/RCDD
 	url = https://huggingface.co/datasets/genghaobuaa/RCDD
+[submodule "recommendation/MovieLens"]
+	path = recommendation/MovieLens
+	url = https://huggingface.co/datasets/genghaobuaa/MovieLens
