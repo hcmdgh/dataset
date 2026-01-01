@@ -1,6 +1,7 @@
 import torch 
 import torch_geometric.utils as pyg_util 
 from torch_geometric.data import Data, Batch 
+import json 
 import pickle 
 import os 
 
@@ -57,6 +58,20 @@ def load_ogbn_arxiv_dataset(
         )
 
     return graph 
+
+
+def load_ogbn_arxiv_text_data() -> tuple[list[str], list[str]]:
+    dataset_dir = os.path.join(dataset_root, 'ogbn-arxiv/processed_data')
+
+    with open(os.path.join(dataset_dir, 'title_list.json'), 'rt', encoding='utf-8') as r:
+        title_list = json.load(r)
+
+    with open(os.path.join(dataset_dir, 'abstract_list.json'), 'rt', encoding='utf-8') as r:
+        abstract_list = json.load(r)
+
+    assert len(title_list) == len(abstract_list) 
+
+    return title_list, abstract_list
 
 
 if __name__ == '__main__':
