@@ -77,6 +77,7 @@ def load_dblp_dataset(
 
 def load_aminer_dataset(
     split: int,
+    add_node_feat: str = 'onehot',
 ) -> HeteroData:
     graph_path = os.path.join(dataset_root, 'HeCo/AMiner/processed_data/graph.pkl')
     split_path = os.path.join(dataset_root, 'HeCo/AMiner/processed_data/split.pkl')
@@ -90,6 +91,17 @@ def load_aminer_dataset(
     graph['paper']['train_mask'] = train_mask_dict[split]
     graph['paper']['val_mask'] = val_mask_dict[split]
     graph['paper']['test_mask'] = test_mask_dict[split]
+
+    if add_node_feat == 'onehot':
+        pass 
+    elif add_node_feat.startswith('randn_'):
+        node_feat_dim = int(add_node_feat.removeprefix('randn_'))
+
+        for node_type in graph.node_types:
+            node_feat = torch.randn(int(graph[node_type].num_nodes), node_feat_dim, dtype=torch.float32)
+            graph[node_type].x = node_feat
+    else:
+        raise ValueError 
 
     return graph 
 
