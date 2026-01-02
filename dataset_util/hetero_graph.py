@@ -37,7 +37,82 @@ def load_rcdd_subgraph_dataset(
     return graph 
 
 
+def load_acm_dataset(
+    split: int,
+) -> HeteroData:
+    graph_path = os.path.join(dataset_root, 'HeCo/ACM/processed_data/graph.pkl')
+    split_path = os.path.join(dataset_root, 'HeCo/ACM/processed_data/split.pkl')
+
+    with open(graph_path, 'rb') as r:
+        graph = pickle.load(r)
+
+    with open(split_path, 'rb') as r:
+        train_mask_dict, val_mask_dict, test_mask_dict = pickle.load(r)
+
+    graph['paper']['train_mask'] = train_mask_dict[split]
+    graph['paper']['val_mask'] = val_mask_dict[split]
+    graph['paper']['test_mask'] = test_mask_dict[split]
+
+    return graph 
+
+
+def load_dblp_dataset(
+    split: int,
+) -> HeteroData:
+    graph_path = os.path.join(dataset_root, 'HeCo/DBLP/processed_data/graph.pkl')
+    split_path = os.path.join(dataset_root, 'HeCo/DBLP/processed_data/split.pkl')
+
+    with open(graph_path, 'rb') as r:
+        graph = pickle.load(r)
+
+    with open(split_path, 'rb') as r:
+        train_mask_dict, val_mask_dict, test_mask_dict = pickle.load(r)
+
+    graph['author']['train_mask'] = train_mask_dict[split]
+    graph['author']['val_mask'] = val_mask_dict[split]
+    graph['author']['test_mask'] = test_mask_dict[split]
+
+    return graph 
+
+
+def load_aminer_dataset(
+    split: int,
+) -> HeteroData:
+    graph_path = os.path.join(dataset_root, 'HeCo/AMiner/processed_data/graph.pkl')
+    split_path = os.path.join(dataset_root, 'HeCo/AMiner/processed_data/split.pkl')
+
+    with open(graph_path, 'rb') as r:
+        graph = pickle.load(r)
+
+    with open(split_path, 'rb') as r:
+        train_mask_dict, val_mask_dict, test_mask_dict = pickle.load(r)
+
+    graph['paper']['train_mask'] = train_mask_dict[split]
+    graph['paper']['val_mask'] = val_mask_dict[split]
+    graph['paper']['test_mask'] = test_mask_dict[split]
+
+    return graph 
+
+
+def load_freebase_dataset(
+    split: int,
+) -> HeteroData:
+    graph_path = os.path.join(dataset_root, 'HeCo/Freebase/processed_data/graph.pkl')
+    split_path = os.path.join(dataset_root, 'HeCo/Freebase/processed_data/split.pkl')
+
+    with open(graph_path, 'rb') as r:
+        graph = pickle.load(r)
+
+    with open(split_path, 'rb') as r:
+        train_mask_dict, val_mask_dict, test_mask_dict = pickle.load(r)
+
+    graph['movie']['train_mask'] = train_mask_dict[split]
+    graph['movie']['val_mask'] = val_mask_dict[split]
+    graph['movie']['test_mask'] = test_mask_dict[split]
+
+    return graph 
+
+
 if __name__ == '__main__':
-    data = load_rcdd_subgraph_dataset(
-    )
-    print(data)
+    dataset = load_acm_dataset(split=20)
+    print(dataset)

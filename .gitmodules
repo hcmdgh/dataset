@@ -1,12 +1,3 @@
-[submodule "hetero_graph/acm"]
-	path = hetero_graph/ACM
-	url = https://huggingface.co/datasets/genghaobuaa/ACM
-[submodule "hetero_graph/imdb"]
-	path = hetero_graph/IMDB
-	url = https://huggingface.co/datasets/genghaobuaa/IMDB
-[submodule "hetero_graph/dblp"]
-	path = hetero_graph/DBLP
-	url = https://huggingface.co/datasets/genghaobuaa/DBLP
 [submodule "graph_collection/TRIANGLES"]
 	path = graph_collection/TRIANGLES
 	url = https://huggingface.co/datasets/genghaobuaa/TRIANGLES
@@ -28,3 +19,6 @@
 [submodule "recommendation/MovieLens"]
 	path = recommendation/MovieLens
 	url = https://huggingface.co/datasets/genghaobuaa/MovieLens
+[submodule "hetero_graph/HeCo"]
+	path = hetero_graph/HeCo
+	url = https://huggingface.co/datasets/genghaobuaa/HeCo
