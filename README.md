@@ -5,9 +5,10 @@
 # 数据集描述
 
 - 异质图
-    - [ACM](https://huggingface.co/datasets/genghaobuaa/ACM)
-    - [DBLP](https://huggingface.co/datasets/genghaobuaa/DBLP)
-    - [IMDB](https://huggingface.co/datasets/genghaobuaa/IMDB)
+    - [ACM (from HeCo)](https://huggingface.co/datasets/genghaobuaa/HeCo)
+    - [DBLP (from HeCo)](https://huggingface.co/datasets/genghaobuaa/HeCo)
+    - [Freebase (from HeCo)](https://huggingface.co/datasets/genghaobuaa/HeCo)
+    - [AMiner (from HeCo)](https://huggingface.co/datasets/genghaobuaa/HeCo)
 - 图集合
     - [TRIANGLES](https://huggingface.co/datasets/genghaobuaa/TRIANGLES)
     - [substructure_counting](https://huggingface.co/datasets/genghaobuaa/substructure_counting)
@@ -34,8 +35,15 @@ git lfs pull
 
 ## 加载数据集
 
-通过各个数据集目录下的load.py，加载数据集。
+通过dataset_util，加载相应的数据集：
+
+```python
+import dataset_util
+
+dataset = load_acm_dataset(split=20)
+print(dataset)
+```
 
 # 原始数据下载
 
-数据集的原始数据存储在[我的Hugging Face空间](https://huggingface.co/genghaobuaa/datasets)。
+数据集的原始数据存储于：[https://huggingface.co/genghaobuaa/datasets](https://huggingface.co/genghaobuaa/datasets)
