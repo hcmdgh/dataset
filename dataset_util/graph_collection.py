@@ -118,8 +118,28 @@ def load_cluster_dataset(
     return tuple(graph_batch_list)
 
 
+def load_pattern_dataset(
+    add_self_loop: bool,
+) -> tuple[Batch, Batch, Batch]:
+    dataset_dir = os.path.join(dataset_root, 'GNN-Benchmark-Dataset/PATTERN')
+
+    with open(os.path.join(dataset_dir, f'processed_data/train_val_test_graph_batch.pkl'), 'rb') as r:
+        graph_batch_list = pickle.load(r)
+
+    graph_batch_list = [
+        transform_graph_batch(
+            graph_batch = graph_batch,
+            add_node_feat = 'none',
+            add_self_loop = add_self_loop,
+        )
+        for graph_batch in graph_batch_list
+    ]
+
+    return tuple(graph_batch_list)
+
+
 if __name__ == '__main__':
-    data = load_cluster_dataset(
+    data = load_pattern_dataset(
         add_self_loop = True,
     )
     print(data)

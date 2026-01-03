@@ -22,3 +22,6 @@
 [submodule "hetero_graph/HeCo"]
 	path = hetero_graph/HeCo
 	url = https://huggingface.co/datasets/genghaobuaa/HeCo
+[submodule "hetero_graph/HIN-Dataset"]
+	path = hetero_graph/HIN-Dataset
+	url = https://huggingface.co/datasets/genghaobuaa/HIN-Dataset
