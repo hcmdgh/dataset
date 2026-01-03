@@ -127,6 +127,7 @@ def load_heco_freebase_dataset(
 
 def load_hin_aminer_dataset(
     split: int,
+    add_node_feat: str,
 ) -> HeteroData:
     graph_path = os.path.join(dataset_root, 'HIN-Dataset/processed_data/graph.pkl')
     split_path = os.path.join(dataset_root, 'HIN-Dataset/processed_data/split.pkl')
@@ -141,9 +142,29 @@ def load_hin_aminer_dataset(
     graph['paper']['val_mask'] = val_mask_dict[split]
     graph['paper']['test_mask'] = test_mask_dict[split]
 
+    if add_node_feat == 'onehot':
+        for node_type in graph.node_types:
+            num_nodes = int(graph[node_type].num_nodes)
+
+            node_feat = torch.sparse_coo_tensor(
+                indices = torch.arange(num_nodes).reshape(1, num_nodes).repeat(2, 1),
+                values = torch.ones(num_nodes, dtype=torch.float32),
+                size = (num_nodes, num_nodes),
+            )
+            graph[node_type].x = node_feat
+    elif add_node_feat.startswith('randn_'):
+        node_feat_dim = int(add_node_feat.removeprefix('randn_'))
+
+        for node_type in graph.node_types:
+            num_nodes = int(graph[node_type].num_nodes)
+            node_feat = torch.randn(num_nodes, node_feat_dim, dtype=torch.float32)
+            graph[node_type].x = node_feat
+    else:
+        raise ValueError 
+
     return graph 
 
 
 if __name__ == '__main__':
-    dataset = load_hin_aminer_dataset(split=20)
+    dataset = load_hin_aminer_dataset(split=20, add_node_feat='onehot')
     print(dataset)
