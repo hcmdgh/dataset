@@ -77,7 +77,7 @@ def load_heco_dblp_dataset(
 
 def load_heco_aminer_dataset(
     split: int,
-    add_node_feat: str = 'onehot',
+    add_node_feat: str,
 ) -> HeteroData:
     graph_path = os.path.join(dataset_root, 'HeCo/AMiner/processed_data/graph.pkl')
     split_path = os.path.join(dataset_root, 'HeCo/AMiner/processed_data/split.pkl')
@@ -108,6 +108,7 @@ def load_heco_aminer_dataset(
 
 def load_heco_freebase_dataset(
     split: int,
+    add_node_feat: str,
 ) -> HeteroData:
     graph_path = os.path.join(dataset_root, 'HeCo/Freebase/processed_data/graph.pkl')
     split_path = os.path.join(dataset_root, 'HeCo/Freebase/processed_data/split.pkl')
@@ -121,6 +122,17 @@ def load_heco_freebase_dataset(
     graph['movie']['train_mask'] = train_mask_dict[split]
     graph['movie']['val_mask'] = val_mask_dict[split]
     graph['movie']['test_mask'] = test_mask_dict[split]
+
+    if add_node_feat == 'onehot':
+        pass 
+    elif add_node_feat.startswith('randn_'):
+        node_feat_dim = int(add_node_feat.removeprefix('randn_'))
+
+        for node_type in graph.node_types:
+            node_feat = torch.randn(int(graph[node_type].num_nodes), node_feat_dim, dtype=torch.float32)
+            graph[node_type].x = node_feat
+    else:
+        raise ValueError 
 
     return graph 
 
