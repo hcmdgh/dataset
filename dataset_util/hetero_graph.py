@@ -144,6 +144,30 @@ def load_hin_aminer_dataset(
     return graph 
 
 
+def load_imdb_dataset(
+    split: str | int,
+) -> HeteroData:
+    graph_path = os.path.join(dataset_root, 'IMDB/processed_data/graph.pkl')
+    split_path = os.path.join(dataset_root, 'IMDB/processed_data/split.pkl')
+
+    with open(graph_path, 'rb') as r:
+        graph = pickle.load(r)
+
+    if split == 'official':
+        pass 
+    else:
+        split = int(split)
+
+        with open(split_path, 'rb') as r:
+            train_mask_dict, val_mask_dict, test_mask_dict = pickle.load(r)
+
+        graph['movie']['train_mask'] = train_mask_dict[split]
+        graph['movie']['val_mask'] = val_mask_dict[split]
+        graph['movie']['test_mask'] = test_mask_dict[split]
+
+    return graph 
+
+
 if __name__ == '__main__':
-    dataset = load_hin_aminer_dataset(split=20)
+    dataset = load_imdb_dataset(split=20)
     print(dataset)

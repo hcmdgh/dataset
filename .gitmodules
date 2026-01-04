@@ -25,3 +25,6 @@
 [submodule "hetero_graph/HIN-Dataset"]
 	path = hetero_graph/HIN-Dataset
 	url = https://huggingface.co/datasets/genghaobuaa/HIN-Dataset
+[submodule "hetero_graph/IMDB"]
+	path = hetero_graph/IMDB
+	url = https://huggingface.co/datasets/genghaobuaa/IMDB
